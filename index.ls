@@ -5,19 +5,26 @@ App =
 		for flag in @flags
 			name = flag.unicode.toLowerCase!replace /u\+/g "" .replace " " \-
 			flag.twemoji = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/#name.svg"
+			flag.title = """
+				Name: #{flag.name}
+				Code: #{flag.code}
+			"""
 		m.redraw!
+
+	onclickFlag: (flag) !->
+		navigator.clipboard.writeText flag.emoji
 
 	view: ->
 		if @flags
-			m \.grid.p-2,
-				style:
-					gridTemplateColumns: "repeat(auto-fill,minmax(80px,1fr))"
+			m \.flags,
 				@flags.map (flag) ~>
-					m \.flex.flex-col.items-center.text-center.text-sm.cursor-copy.hover:outline.hover:outline-dotted.hover:outline-2,
+					m \.flag,
+						title: flag.title
 						onclick: !~>
-							navigator.clipboard.writeText flag.emoji
-						m \img.h-10,
+							@onclickFlag flag
+						m \img.flag-img,
 							src: flag.twemoji
-						flag.name
+						m \.flag-name,
+							flag.name
 
 m.mount document.body, App

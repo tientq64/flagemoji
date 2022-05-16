@@ -1,0 +1,27 @@
+*, :before, :after
+	box-sizing border-box
+body
+	margin 0
+	font-family "Roboto","Segoe UI",sans-serif
+	font-size 10px
+.flags
+	display grid
+	grid-template-columns repeat(auto-fill,minmax(64px,1fr))
+	grid-auto-rows 1fr
+	gap 2px
+	padding 8px
+	text-align center
+.flag
+	display flex
+	flex-direction column
+	align-items center
+	cursor copy
+	&:hover
+		outline dotted 2px #888
+.flag-img
+	height 28px
+.flag-name
+	display -webkit-box
+	overflow hidden
+	-webkit-line-clamp 2
+	-webkit-box-orient vertical
